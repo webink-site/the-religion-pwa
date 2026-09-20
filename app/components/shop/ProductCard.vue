@@ -1,12 +1,31 @@
 <template>
   <nuxt-link to="/" class="">
-    <div class="aspect-[0.659997] bg-gray-200 mb-2">
+    <div
+      class="aspect-[0.659997] bg-gray-200 relative group"
+      :class="{
+        'mb-2': !props.minimalMode,
+      }"
+    >
       <img
-        src="https://api.therlgn.com/storage/uploads/product/271/conversions/01M2X3Z8ZK19XXW1RXTNJZ6S0H-lg.webp" alt=""
+        :src="props.mainImg"
         class="object-cover w-full h-full"
+        alt="props.name"
+        loading="lazy"
+        decoding="async"
       >
+      <IconsPlus class="size-6 absolute bottom-6 left-1/2 -translate-x-1/2 group-hover:rotate-180 transition-all" />
     </div>
-    <p class="text-xs">Кепка The Religion Baseball Cap</p>
-    <p class="text-xs">39 980 ₽</p>
+    <div v-if="!props.minimalMode">
+      <p class="text-xs">{{ props.name }}</p>
+      <p class="text-xs">39 980 ₽</p>
+    </div>
   </nuxt-link>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  name: string
+  minimalMode?: boolean
+  mainImg: string
+}>()
+</script>

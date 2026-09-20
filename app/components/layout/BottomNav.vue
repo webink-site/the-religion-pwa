@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed bottom-0 left-0 w-full">
-    <div class="flex justify-center items-center pb-4 pt-1">
+  <div class="fixed bottom-0 left-0 w-full transition-all duration-500" :class="scrollY < offsetTrigger ? '' : 'bg-white'">
+    <div class="flex justify-center items-center pb-4 pt-1 ">
       <nuxt-link
         v-for="link in bottomBarLinks"
         :key="link.title"
@@ -14,7 +14,7 @@
           :is="link.icon"
           :count="1"
           class="mx-auto h-6 w-6 shrink-0 text-black"
-          :class="{ 'text-white': route.meta.darkNav }"
+          :class="{ 'text-white': route.meta.darkNav && scrollY < offsetTrigger }"
         />
         <!-- <p class="text-xs tracking-tight leading-[120%] text-white">
           {{ link.title }}
@@ -25,39 +25,47 @@
 </template>
 
 <script setup lang="ts">
-import IconsBarCatalog from '../icons/bar-catalog.vue'
-import IconsBarContacts from '../icons/bar-contacts.vue'
-import IconsBarCart from '../icons/bar-cart.vue'
-import IconsBarProfile from '../icons/bar-profile.vue'
-import IconsBarHome from '../icons/bar-home.vue'
+import BarCart from '../icons/bar-cart.vue'
+import { Heart, House, Shirt, UserRound } from '@lucide/vue'
 
 const route = useRoute()
+const scrollY = ref(0)
+const offsetTrigger = 200
+
+const updateScroll = () => {
+  scrollY.value = window.scrollY
+}
+
+onMounted(() => {
+  updateScroll()
+  window.addEventListener('scroll', updateScroll)
+})
 
 const bottomBarLinks = [
   {
     title: 'Каталог',
     url: '/catalog',
-    icon: IconsBarCatalog,
+    icon: Shirt,
   },
   {
     title: 'Контакты',
     url: '/contacts',
-    icon: IconsBarContacts,
+    icon: Heart,
   },
   {
     title: 'Главная',
     url: '/',
-    icon: IconsBarHome,
+    icon: House,
   },
   {
     title: 'Профиль',
     url: '/profile',
-    icon: IconsBarProfile,
+    icon: UserRound,
   },
   {
     title: 'Корзина',
     url: '/cart',
-    icon: IconsBarCart,
+    icon: BarCart,
   },
 ]
 

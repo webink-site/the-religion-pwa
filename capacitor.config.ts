@@ -1,9 +1,11 @@
 import type { CapacitorConfig } from '@capacitor/cli'
+import { NATIVE_UA_MARK } from './shared/native'
 
 const config: CapacitorConfig = {
   appId: 'app.therlgn',
   appName: 'The Religion',
   webDir: '.output/public',
+  appendUserAgent: NATIVE_UA_MARK,
   plugins: {
     SplashScreen: {
       launchShowDuration: 0,

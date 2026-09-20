@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div id="layout-div">
+    <LayoutMobileTopNav />
     <slot />
     <LayoutBottomNav />
   </div>
