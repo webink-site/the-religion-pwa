@@ -1,6 +1,75 @@
 @import "tailwindcss";
 @config "../../../tailwind.config.js";
 
+:root {
+  --ui-ink: #202020;
+  --ui-muted: rgba(0, 0, 0, 0.4);
+  --ui-line: #e5e5e5;
+  --ui-surface: #f3f3f3;
+  --ui-surface-hover: #e8e8e8;
+  --ui-page: #ffffff;
+  --ui-calendar-width: 320px;
+  --ui-radius: 6px;
+  --ui-radius-lg: 8px;
+  --ui-shadow-float: 0 2px 16px rgba(0, 0, 0, 0.08);
+  --letter-spacing-ui: 0.03em;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--ui-ink);
+  background-color: var(--ui-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .text-secondary {
+    color: var(--ui-muted);
+  }
+  .caption-txt {
+    @apply text-[10px] sm:text-xs leading-[125%];
+    letter-spacing: var(--letter-spacing-ui);
+  }
+  .body-txt {
+    @apply text-sm leading-[130%];
+    letter-spacing: var(--letter-spacing-ui);
+  }
+  .ui-section-title {
+    @apply text-xs sm:text-sm leading-[130%];
+    letter-spacing: var(--letter-spacing-ui);
+    color: var(--ui-muted);
+  }
+  .custom-container {
+    @apply px-4 sm:px-8 max-w-3xl mx-auto;
+  }
+  .basic-link {
+    @apply underline underline-offset-4 hover:opacity-80 cursor-pointer;
+  }
+  .ui-btn-base {
+    @apply inline-flex items-center justify-center w-full sm:w-auto min-h-11 sm:min-h-[54px] px-4 py-[18px] text-sm leading-[130%] rounded-[var(--ui-radius)] transition-all duration-300 cursor-pointer;
+    letter-spacing: var(--letter-spacing-ui);
+  }
+  .ui-input-line {
+    box-shadow: inset 0 -1px 0 0 var(--ui-ink);
+    transition: box-shadow 0.3s ease;
+  }
+  .ui-input-line-focus {
+    box-shadow: inset 0 -2px 0 0 var(--ui-ink);
+  }
+  .ui-input-line-error {
+    box-shadow: inset 0 -2px 0 0 #e64646;
+  }
+}
+
+button,
+a {
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
 
 /*  */
 .fade-slide-enter-from,
