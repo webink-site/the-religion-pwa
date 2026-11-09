@@ -5,7 +5,7 @@
   >
     <span
       class="body-txt truncate transition-colors"
-      :class="error ? 'text-[#e64646]' : 'text-secondary'"
+      :class="error ? 'text-danger' : 'text-secondary'"
     >
       {{ label }}
     </span>
@@ -17,7 +17,7 @@
       <input
         v-model="inputVal"
         :type="type"
-        class="relative z-[2] w-full border-0 bg-transparent outline-none text-base sm:text-base text-[var(--ui-ink)] placeholder:text-[var(--ui-ink)] pb-1"
+        class="relative z-[2] w-full border-0 bg-transparent outline-none text-base text-ink placeholder:text-ink pb-1"
         :disabled="disabled"
         @focus="focused = true"
         @blur="focused = false"
@@ -38,9 +38,9 @@
       v-else
       v-model="inputVal"
       :type="type"
-      class="w-full rounded-[var(--ui-radius-lg)] bg-[var(--ui-surface)] px-4 py-3 text-sm text-[var(--ui-ink)] outline-none placeholder:text-secondary transition-shadow shadow-[inset_0_0_0_1px_transparent] focus:shadow-[inset_0_0_0_1px_var(--ui-ink)]"
+      class="w-full rounded-ui-lg bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-secondary transition-shadow shadow-[inset_0_0_0_1px_transparent] focus:shadow-inset-ink"
       :class="{
-        'shadow-[inset_0_0_0_1px_#e64646] focus:shadow-[inset_0_0_0_1px_#e64646]': error,
+        'shadow-inset-danger focus:shadow-inset-danger': error,
       }"
       :disabled="disabled"
     >

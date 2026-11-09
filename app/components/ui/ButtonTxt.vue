@@ -1,8 +1,7 @@
 <template>
   <button
     type="button"
-    class="cursor-pointer text-sm leading-[130%] text-[var(--ui-ink)] underline underline-offset-4 hover:opacity-60 transition-opacity"
-    style="letter-spacing: var(--letter-spacing-ui)"
+    class="cursor-pointer text-sm leading-[130%] tracking-ui text-ink underline underline-offset-4 hover:opacity-60 transition-opacity"
   >
     <slot>{{ title }}</slot>
   </button>

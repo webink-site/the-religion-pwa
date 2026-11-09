@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="box-border select-none px-5 pt-5 pb-4"
-    style="width: var(--ui-calendar-width);"
-  >
+  <div class="box-border w-calendar select-none px-5 pt-5 pb-4">
     <div class="flex items-center justify-between mb-4 px-0.5">
       <button
         type="button"
-        class="inline-flex size-8 items-center justify-center rounded-[var(--ui-radius)] hover:bg-[var(--ui-surface)]"
+        class="inline-flex size-8 items-center justify-center rounded-ui hover:bg-surface"
         aria-label="Предыдущий месяц"
         @click="prevMonth"
       >
@@ -17,7 +14,7 @@
       </p>
       <button
         type="button"
-        class="inline-flex size-8 items-center justify-center rounded-[var(--ui-radius)] hover:bg-[var(--ui-surface)]"
+        class="inline-flex size-8 items-center justify-center rounded-ui hover:bg-surface"
         aria-label="Следующий месяц"
         @click="nextMonth"
       >
@@ -40,7 +37,7 @@
         v-for="(day, index) in gridDays"
         :key="`${day.date.toISOString()}-${index}`"
         type="button"
-        class="mx-auto flex size-9 items-center justify-center text-xs rounded-[var(--ui-radius)] transition-colors"
+        class="mx-auto flex size-9 items-center justify-center text-xs rounded-ui transition-colors"
         :class="dayCellClass(day)"
         :disabled="day.outside && !showOutsideDays"
         @click="pickDay(day)"
@@ -103,9 +100,9 @@ function dayCellClass(day: CalendarDay) {
   return {
     'text-secondary': day.outside,
     'opacity-40': day.outside && !props.showOutsideDays,
-    'bg-[var(--ui-ink)] text-white hover:bg-[#333]': selected,
-    'hover:bg-[var(--ui-surface)]': !selected,
-    'bg-[var(--ui-surface)] font-medium': today && !selected,
+    'bg-ink text-white hover:bg-[#333]': selected,
+    'hover:bg-surface': !selected,
+    'bg-surface font-medium': today && !selected,
     'font-medium': today,
   }
 }

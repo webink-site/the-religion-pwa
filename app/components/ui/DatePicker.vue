@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="max-w-full"
-    style="width: var(--ui-calendar-width);"
-  >
+  <div class="w-calendar max-w-full">
     <UiPopover
       v-model:open="open"
       full-width
@@ -12,12 +9,12 @@
       <template #trigger>
         <button
           type="button"
-          class="w-full text-left relative select-none min-h-[48px] flex items-center px-4 py-3 pr-12 body-txt bg-white rounded-[var(--ui-radius-lg)] transition-colors hover:bg-[var(--ui-surface)]/80"
-          :class="error ? 'ring-2 ring-[#e64646]/30' : 'shadow-[inset_0_0_0_1px_var(--ui-line)]'"
+          class="w-full text-left relative select-none min-h-[48px] flex items-center px-4 py-3 pr-12 body-txt bg-white rounded-ui-lg transition-colors hover:bg-surface/80"
+          :class="error ? 'ring-2 ring-danger/30' : 'shadow-inset-line'"
         >
           <span
             class="block truncate"
-            :class="!displayValue ? 'text-secondary' : 'text-[var(--ui-ink)]'"
+            :class="!displayValue ? 'text-secondary' : 'text-ink'"
           >
             {{ displayValue || placeholder }}
           </span>

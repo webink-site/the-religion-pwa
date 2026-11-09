@@ -13,7 +13,7 @@
         v-for="(item, i) in items"
         :key="i"
         type="button"
-        class="flex w-full items-center gap-2 px-4 py-2.5 text-left body-txt hover:bg-[var(--ui-surface)] disabled:opacity-40 rounded-[var(--ui-radius)] mx-1 w-[calc(100%-8px)]"
+        class="flex w-full items-center gap-2 px-4 py-2.5 text-left body-txt hover:bg-surface disabled:opacity-40 rounded-ui mx-1 w-[calc(100%-8px)]"
         :disabled="Boolean(item.disabled)"
         @click="onSelect(item, close)"
       >

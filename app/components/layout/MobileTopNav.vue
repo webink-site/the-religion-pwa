@@ -1,25 +1,48 @@
 <template>
-  <client-only>
+  <ClientOnly>
     <div
-      class="fixed top-0 left-0 w-full z-10 pt-16 px-4 pb-4 flex items-center justify-between"
-      :class="{ '!pt-4': !isNativeApp }"
+      class="fixed top-0 left-0 z-[70] w-full px-4 pb-3 flex items-center justify-between transition-all duration-500"
+      :class="[
+        isNativeApp ? 'pt-16' : 'pt-3',
+        isScrolled || isMenuOpen ? 'bg-white' : 'bg-transparent',
+      ]"
     >
-      <!-- бургер -->
-      <button @click="showSidebar = !showSidebar">
-        <IconsBurger class="h-8 w-8" />
+      <button
+        type="button"
+        class="inline-flex size-10 items-center justify-center"
+        :aria-label="isMenuOpen ? 'Закрыть меню' : 'Открыть меню'"
+        @click="toggleSidebar"
+      >
+        <X
+          v-if="isMenuOpen"
+          class="size-6"
+          :stroke-width="1.3"
+        />
+        <IconsBurger
+          v-else
+          class="h-8 w-8"
+        />
       </button>
 
-      <NuxtLink v-if="!isNativeApp" to="/">
+      <NuxtLink
+        v-if="!isNativeApp"
+        to="/"
+      >
         <img
           src="/img/logo/dark_logo.svg"
           alt="The Religion logo"
         >
       </NuxtLink>
 
-      <!-- поиск -->
-      <button @click="showSearchPanel = !showSearchPanel">
-        <Search />
+      <button
+        type="button"
+        class="inline-flex size-10 items-center justify-center"
+        aria-label="Открыть поиск"
+        @click="openSearch"
+      >
+        <Search class="size-6" :stroke-width="1.3" />
       </button>
+
       <Teleport
         v-if="isMounted"
         to="#layout-div"
@@ -30,21 +53,26 @@
         >
           <SearchPanel
             v-if="showSearchPanel"
-            @close-panel="showSearchPanel = false"
+            @close-panel="closeSearch"
           />
         </Transition>
       </Teleport>
     </div>
-  </client-only>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import { Search } from '@lucide/vue'
+import { Search, X } from '@lucide/vue'
 
 const { isNativeApp } = useNativeApp()
-
-const showSidebar = ref(false)
-const showSearchPanel = ref(false)
+const {
+  isScrolled,
+  isMenuOpen,
+  showSearchPanel,
+  toggleSidebar,
+  openSearch,
+  closeSearch,
+} = useNav()
 
 const isMounted = ref(false)
 onMounted(() => {

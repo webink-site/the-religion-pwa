@@ -5,10 +5,10 @@
     :aria-checked="selected"
     @click="toggle"
   >
-    <label class="cursor-pointer select-none body-txt text-[var(--ui-ink)]">{{ label }}</label>
+    <label class="cursor-pointer select-none body-txt text-ink">{{ label }}</label>
     <div
       class="relative h-6 w-11 shrink-0 rounded-full bg-[#e5e7eb] transition-colors duration-300"
-      :class="{ '!bg-[var(--ui-ink)]': selected }"
+      :class="{ '!bg-ink': selected }"
     >
       <div
         class="absolute top-0.5 left-0.5 size-5 rounded-full bg-white shadow-sm transition-transform duration-300"

@@ -5,15 +5,15 @@
   >
     <span
       class="body-txt transition-colors"
-      :class="error ? 'text-[#e64646]' : 'text-secondary'"
+      :class="error ? 'text-danger' : 'text-secondary'"
     >
       {{ label }}
     </span>
     <textarea
       v-model="inputVal"
       rows="4"
-      class="w-full resize-none rounded-[var(--ui-radius-lg)] bg-[var(--ui-surface)] px-4 py-3 text-sm leading-[140%] text-[var(--ui-ink)] outline-none placeholder:text-secondary transition-shadow shadow-[inset_0_0_0_1px_transparent] focus:shadow-[inset_0_0_0_1px_var(--ui-ink)]"
-      :class="{ 'shadow-[inset_0_0_0_1px_#e64646] focus:shadow-[inset_0_0_0_1px_#e64646]': error }"
+      class="w-full resize-none rounded-ui-lg bg-surface px-4 py-3 text-sm leading-[140%] text-ink outline-none placeholder:text-secondary transition-shadow shadow-[inset_0_0_0_1px_transparent] focus:shadow-inset-ink"
+      :class="{ 'shadow-inset-danger focus:shadow-inset-danger': error }"
       :disabled="disabled"
     />
   </div>

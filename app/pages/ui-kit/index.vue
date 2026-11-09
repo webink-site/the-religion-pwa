@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-32 pt-24 custom-container space-y-14 bg-[var(--ui-page)] min-h-screen">
+  <div class="pb-32 pt-24 custom-container space-y-14 bg-page min-h-screen">
     <header class="space-y-2">
       <p class="ui-section-title">
         UI Kit
@@ -9,7 +9,7 @@
       </h1>
       <p class="body-txt text-secondary max-w-md">
         Визуал по мотивам 2MOOD / 12 Storeez. Логика полей — через
-        <code class="text-[10px] bg-[var(--ui-surface)] px-1.5 py-0.5 rounded-[4px]">defineModel</code>.
+        <code class="text-[10px] bg-surface px-1.5 py-0.5 rounded-[4px]">defineModel</code>.
       </p>
     </header>
 
@@ -67,8 +67,8 @@
               v-for="opt in sortOptions"
               :key="opt.value"
               type="button"
-              class="block w-full px-4 py-2.5 text-left body-txt hover:bg-[var(--ui-surface)] rounded-[var(--ui-radius)]"
-              :class="{ 'bg-[var(--ui-surface)] font-medium': form.sort === opt.value }"
+              class="block w-full px-4 py-2.5 text-left body-txt hover:bg-surface rounded-ui"
+              :class="{ 'bg-surface font-medium': form.sort === opt.value }"
               @click="form.sort = opt.value; close()"
             >
               {{ opt.label }}
@@ -149,10 +149,7 @@
       <h2 class="ui-section-title">
         Календарь (shadcn)
       </h2>
-      <div
-        class="w-fit rounded-[var(--ui-radius-lg)] bg-white overflow-hidden"
-        style="box-shadow: var(--ui-shadow-float);"
-      >
+      <div class="w-fit rounded-ui-lg bg-white overflow-hidden shadow-float">
         <UiCalendar v-model="form.birthDate" />
       </div>
       <UiDatePicker
@@ -204,7 +201,7 @@
       />
     </section>
 
-    <section class="space-y-3 border-t border-[var(--ui-line)] pt-8">
+    <section class="space-y-3 border-t border-line pt-8">
       <div class="flex flex-col sm:flex-row gap-3 max-w-md">
         <UiButton
           title="Проверить форму"
@@ -219,7 +216,7 @@
           @click="resetForm"
         />
       </div>
-      <pre class="text-[10px] sm:text-xs bg-white p-4 overflow-auto rounded-[var(--ui-radius-lg)] leading-relaxed shadow-[inset_0_0_0_1px_var(--ui-line)]">{{ formPreview }}</pre>
+      <pre class="text-[10px] sm:text-xs bg-white p-4 overflow-auto rounded-ui-lg leading-relaxed shadow-inset-line">{{ formPreview }}</pre>
     </section>
   </div>
 </template>

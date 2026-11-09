@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeHero />
+    <HomeCategories />
     <HomeProducts />
   </div>
 </template>

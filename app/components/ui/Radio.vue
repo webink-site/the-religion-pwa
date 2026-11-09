@@ -3,7 +3,7 @@
     <p
       v-if="label"
       class="body-txt mb-3"
-      :class="{ 'text-[#e64646]': error }"
+      :class="{ 'text-danger': error }"
     >
       {{ label }}
     </p>
@@ -26,7 +26,7 @@
 
     <span
       v-if="error"
-      class="caption-txt text-[#e64646] mt-2 block"
+      class="caption-txt text-danger mt-2 block"
     >
       Обязательное поле
     </span>
@@ -73,27 +73,27 @@ function optionClass(item: unknown) {
 
   if (props.variant === 'chip') {
     return [
-      'rounded-[var(--ui-radius)] px-4 py-2 body-txt cursor-pointer',
+      'rounded-ui px-4 py-2 body-txt cursor-pointer',
       selected
-        ? 'bg-[var(--ui-ink)] text-white'
-        : 'bg-[var(--ui-surface)] text-[var(--ui-ink)] hover:bg-[var(--ui-surface-hover)]',
+        ? 'bg-ink text-white'
+        : 'bg-surface text-ink hover:bg-surface-hover',
     ]
   }
 
   if (props.variant === 'block') {
     return [
-      'w-full rounded-[var(--ui-radius-lg)] px-4 py-4 body-txt cursor-pointer',
+      'w-full rounded-ui-lg px-4 py-4 body-txt cursor-pointer',
       selected
-        ? 'bg-[var(--ui-ink)] text-white'
-        : 'bg-[var(--ui-surface)] text-[var(--ui-ink)] hover:bg-[var(--ui-surface-hover)]',
+        ? 'bg-ink text-white'
+        : 'bg-surface text-ink hover:bg-surface-hover',
     ]
   }
 
   return [
     'py-2 body-txt cursor-pointer',
     selected
-      ? 'text-[var(--ui-ink)] font-medium'
-      : 'text-secondary hover:text-[var(--ui-ink)]',
+      ? 'text-ink font-medium'
+      : 'text-secondary hover:text-ink',
   ]
 }
 </script>

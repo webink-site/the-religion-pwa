@@ -11,7 +11,7 @@
       @change="emit('change')"
     >
     <span
-      class="relative flex size-5 shrink-0 items-center justify-center rounded-[4px] bg-[var(--ui-surface)] text-white transition-[background-color] duration-300 ease-out peer-checked:bg-[var(--ui-ink)]"
+      class="relative flex size-5 shrink-0 items-center justify-center rounded-[4px] bg-surface text-white transition-[background-color] duration-300 ease-out peer-checked:bg-ink"
       :class="{ '!bg-[#fdecec]': error && !selected }"
       aria-hidden="true"
     >
@@ -22,8 +22,8 @@
       />
     </span>
     <span
-      class="body-txt text-[var(--ui-ink)] leading-[130%]"
-      :class="{ 'text-[#e64646]': error }"
+      class="body-txt text-ink leading-[130%]"
+      :class="{ 'text-danger': error }"
     >
       {{ label }}
       <slot name="label" />

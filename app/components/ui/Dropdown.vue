@@ -2,20 +2,20 @@
   <div
     ref="dropdownRef"
     v-click-outside="close"
-    class="relative flex items-center min-h-[46px] px-4 py-1.5 body-txt bg-white rounded-[var(--ui-radius)] cursor-pointer select-none"
+    class="relative flex items-center min-h-[46px] px-4 py-1.5 body-txt bg-white rounded-ui cursor-pointer select-none"
     :class="[
-      error ? 'ring-2 ring-[#e64646]/30' : 'shadow-[inset_0_0_0_1px_var(--ui-line)]',
+      error ? 'ring-2 ring-danger/30' : 'shadow-inset-line',
       disabled ? 'opacity-60 pointer-events-none' : '',
     ]"
     @click="!disabled && (open = !open)"
   >
     <span
       class="truncate pr-10"
-      :class="!selectedLabel ? 'text-secondary' : 'text-[var(--ui-ink)]'"
+      :class="!selectedLabel ? 'text-secondary' : 'text-ink'"
     >
       {{ selectedLabel || placeholder }}
     </span>
-    <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center size-6 text-[var(--ui-ink)]">
+    <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center size-6 text-ink">
       <ChevronDown
         class="size-4 transition-transform duration-300"
         :class="{ 'rotate-180': open }"
@@ -24,16 +24,15 @@
 
     <div
       v-if="open"
-      class="absolute left-0 right-0 z-30 overflow-auto max-h-64 bg-white rounded-[var(--ui-radius)] divide-y divide-[var(--ui-line)]"
+      class="absolute left-0 right-0 z-30 overflow-auto max-h-64 bg-white rounded-ui divide-y divide-line shadow-float"
       :class="dropTop ? 'bottom-full mb-1' : 'top-full mt-1'"
-      style="box-shadow: var(--ui-shadow-float);"
     >
       <button
         v-for="(item, i) in items"
         :key="i"
         type="button"
-        class="flex items-center w-full min-h-[44px] px-4 text-left body-txt hover:bg-[var(--ui-surface)] disabled:text-secondary"
-        :class="{ 'bg-[var(--ui-surface)] font-medium': isSelected(item) }"
+        class="flex items-center w-full min-h-[44px] px-4 text-left body-txt hover:bg-surface disabled:text-secondary"
+        :class="{ 'bg-surface font-medium': isSelected(item) }"
         :disabled="isItemDisabled(item)"
         @click.stop="selectItem(item)"
       >

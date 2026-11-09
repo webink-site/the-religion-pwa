@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/image'],
+  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/image', 'nuxt-swiper'],
   ssr: process.env.NUXT_NATIVE !== '1',
   components: [
     {
@@ -31,5 +31,11 @@ export default defineNuxtConfig({
     config: {
       stylistic: true,
     },
+  },
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'google', weights: [400, 500, 600] },
+      { name: 'Spectral', provider: 'google', weights: [400, 500, 600] },
+    ],
   },
 })

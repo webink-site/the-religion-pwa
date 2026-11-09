@@ -17,12 +17,12 @@
         <div
           v-if="open"
           ref="panelRef"
-          class="fixed z-[100] min-w-[10rem] rounded-[var(--ui-radius-lg)] border border-[var(--ui-line)] bg-white overflow-hidden"
+          class="fixed z-[100] min-w-[10rem] rounded-ui-lg border border-line bg-white overflow-hidden shadow-float"
           :class="[
             panelPadding ? 'py-1' : 'p-0',
             panelFitContent ? 'w-fit max-w-[calc(100vw-16px)]' : '',
           ]"
-          :style="{ ...panelStyle, boxShadow: 'var(--ui-shadow-float)' }"
+          :style="panelStyle"
         >
           <slot name="content" :close="close" />
         </div>
