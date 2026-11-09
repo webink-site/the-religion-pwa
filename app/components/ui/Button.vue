@@ -9,9 +9,9 @@
     ]"
     :disabled="disabled || loading"
   >
-    <span
+    <UiLoader
       v-if="loading"
-      class="inline-block size-3.5 border-2 border-current border-t-transparent rounded-full animate-spin mr-2"
+      class="!text-current"
     />
     <slot>{{ title }}</slot>
   </button>

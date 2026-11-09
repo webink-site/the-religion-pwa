@@ -1,13 +1,27 @@
 <template>
   <div
-    class="px-4 pb-28"
-    :class="isNativeApp ? 'pt-28' : 'pt-20'"
+    class="pb-28"
+    :class="isNativeApp ? 'pt-24' : 'pt-16'"
   >
     <CatalogToolbar />
     <CatalogFilterSheet />
+    <CatalogProductGrid
+      :products="products"
+      :pending="pending"
+      :loading-more="loadingMore"
+      :has-more="hasMore"
+      @load-more="loadMore"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 const { isNativeApp } = useNativeApp()
+const {
+  products,
+  pending,
+  loadingMore,
+  hasMore,
+  loadMore,
+} = await useCatalogProducts()
 </script>

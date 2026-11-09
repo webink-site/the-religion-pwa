@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between gap-3">
+  <div class="flex items-center justify-between gap-3 px-4">
     <UiPopover v-model:open="sortOpen">
       <template #trigger>
         <UiButton
@@ -7,7 +7,7 @@
           size="sm"
           class="!w-auto whitespace-nowrap !px-0"
         >
-          Сортировать по
+          Сортировка
           <ChevronDown
             class="ml-1.5 size-4"
             :stroke-width="1.6"

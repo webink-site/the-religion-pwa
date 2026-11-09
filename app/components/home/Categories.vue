@@ -56,26 +56,13 @@
 <script setup lang="ts">
 import { ChevronLeft, ChevronRight } from '@lucide/vue'
 import type { SwiperContainer } from 'swiper/element'
-import type { ICategory } from '~/types/catalog'
 
-const config = useRuntimeConfig()
+const categoryStore = useCategoryStore()
 
-const { data: categoriesResponse } = await useFetch<Record<string, ICategory> | ICategory[]>(
-  `${config.public.apiUrl}/categories`,
-)
-
-const items = computed(() => {
-  const raw = categoriesResponse.value
-  if (!raw)
-    return [] as ICategory[]
-
-  const list = Array.isArray(raw) ? raw : Object.values(raw)
-
-  return list.filter(category =>
-    category.image
-    && category.slug !== 'bez-gruppy-tovarov',
-  )
-})
+const items = computed(() => categoryStore.items.filter(category =>
+  category.image
+  && category.slug !== 'bez-gruppy-tovarov',
+))
 
 const swiperRef = ref<SwiperContainer | null>(null)
 const isBeginning = ref(true)

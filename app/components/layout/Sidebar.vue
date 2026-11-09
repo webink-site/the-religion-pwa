@@ -147,7 +147,6 @@
 
 <script setup lang="ts">
 import { ChevronRight, Gift } from '@lucide/vue'
-import type { ICategory } from '~/types/catalog'
 
 const { isNativeApp } = useNativeApp()
 const {
@@ -160,23 +159,11 @@ const {
   isLinkActive,
 } = useNav()
 
-const config = useRuntimeConfig()
+const categoryStore = useCategoryStore()
 const year = new Date().getFullYear()
 const expandedIds = ref<Set<string>>(new Set())
 
-const { data: categoriesResponse } = await useFetch<Record<string, ICategory> | ICategory[]>(
-  `${config.public.apiUrl}/categories`,
-  { key: 'nav-categories' },
-)
-
-const items = computed(() => {
-  const raw = categoriesResponse.value
-  if (!raw)
-    return buildMenuItems()
-
-  const list = Array.isArray(raw) ? raw : Object.values(raw)
-  return buildMenuItems(list)
-})
+const items = computed(() => buildMenuItems(categoryStore.items))
 
 function isExpanded(id: string) {
   return expandedIds.value.has(id)

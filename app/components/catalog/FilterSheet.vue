@@ -100,8 +100,9 @@
 
         <div class="border-t border-line px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
           <UiButton
-            title="Смотреть"
+            title="Показать"
             block
+            :loading="applying"
             @click="applyFilters"
           />
         </div>
@@ -117,6 +118,7 @@ import { catalogCollections, catalogSexOptions, catalogSizes } from '~/composabl
 const { isNativeApp } = useNativeApp()
 const {
   filterOpen,
+  applying,
   draft,
   categoryOptions,
   closeFilters,
