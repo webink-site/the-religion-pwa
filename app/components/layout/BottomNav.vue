@@ -3,7 +3,10 @@
     class="fixed bottom-0 left-0 z-40 w-full transition-all duration-500"
     :class="isScrolled || isMenuOpen ? 'bg-white' : ''"
   >
-    <div class="flex justify-center items-center pb-4 pt-1">
+    <div
+      class="flex justify-center items-center pt-1"
+      :class="isNativeApp ? 'pb-4' : 'pb-1'"
+    >
       <NuxtLink
         v-for="link in bottomBarLinks"
         :key="link.title"
@@ -25,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+const { isNativeApp } = useNativeApp()
+
 const route = useRoute()
 const {
   isScrolled,

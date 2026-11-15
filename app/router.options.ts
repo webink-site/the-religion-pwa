@@ -2,15 +2,17 @@ import type { RouterConfig } from '@nuxt/schema'
 
 export default <RouterConfig>{
   scrollBehavior(to, from, savedPosition) {
-    if (to.path === from.path)
-      return false
+    const nuxtApp = useNuxtApp()
 
-    if (savedPosition && to.path === '/catalog')
-      return false
+    return new Promise((resolve) => {
+      nuxtApp.hooks.hookOnce('page:finish', () => {
+        if (to.path === from.path || (savedPosition && to.path === '/catalog')) {
+          resolve(false)
+          return
+        }
 
-    if (savedPosition)
-      return savedPosition
-
-    return { top: 0 }
+        resolve(savedPosition || { top: 0 })
+      })
+    })
   },
 }

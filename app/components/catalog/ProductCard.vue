@@ -22,14 +22,17 @@
         >
           <template v-if="showMedia">
             <img
+              ref="mainRef"
               :src="photos.main"
               :alt="product.name"
-              class="absolute inset-0 size-full object-cover"
+              class="absolute inset-0 size-full object-cover transition-opacity duration-300 ease-out"
+              :class="mainReady ? 'opacity-100' : 'opacity-0'"
               :fetchpriority="priority ? 'high' : 'auto'"
               decoding="async"
+              @load="revealMain"
             >
             <img
-              v-if="photos.hover"
+              v-if="hoverEnabled && photos.hover"
               ref="hoverRef"
               :src="photos.hover"
               alt=""
@@ -104,10 +107,14 @@ const props = defineProps<{
 }>()
 
 const mediaRef = ref<HTMLElement | null>(null)
+const mainRef = ref<HTMLImageElement | null>(null)
 const hoverRef = ref<HTMLImageElement | null>(null)
 const showMedia = ref(Boolean(props.priority))
+const mainReady = ref(false)
 const hoverReady = ref(false)
+const hoverEnabled = ref(false)
 let observer: IntersectionObserver | null = null
+let hoverQuery: MediaQueryList | null = null
 
 const wishlistStore = useWishlistStore()
 const inWishlist = computed(() => wishlistStore.has(props.product.id))
@@ -122,12 +129,35 @@ function openColor(slug: string) {
   navigateTo(`/catalog/${slug}`)
 }
 
+function revealMain() {
+  requestAnimationFrame(() => {
+    mainReady.value = true
+  })
+}
+
+function syncHoverEnabled() {
+  hoverEnabled.value = Boolean(hoverQuery?.matches)
+}
+
+watch(() => photos.value.main, () => {
+  mainReady.value = false
+})
+
+watch(mainRef, (image) => {
+  if (image?.complete && image.naturalWidth > 0)
+    revealMain()
+})
+
 watch(hoverRef, (image) => {
   if (image?.complete && image.naturalWidth > 0)
     hoverReady.value = true
 })
 
 onMounted(() => {
+  hoverQuery = window.matchMedia('(hover: hover) and (min-width: 640px)')
+  syncHoverEnabled()
+  hoverQuery.addEventListener('change', syncHoverEnabled)
+
   if (showMedia.value || !mediaRef.value)
     return
 
@@ -143,6 +173,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  hoverQuery?.removeEventListener('change', syncHoverEnabled)
   observer?.disconnect()
 })
 </script>

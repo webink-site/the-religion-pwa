@@ -173,8 +173,9 @@ export function useCatalogControls() {
     }
   }
 
-  function resetDraft() {
+  async function resetFilters() {
     draft.value = emptyFilters()
+    await applyFilters()
   }
 
   async function setSort(value: CatalogSort) {
@@ -201,7 +202,7 @@ export function useCatalogControls() {
     openFilters,
     closeFilters,
     applyFilters,
-    resetDraft,
+    resetFilters,
     setSort,
     toggleDraftList,
   }

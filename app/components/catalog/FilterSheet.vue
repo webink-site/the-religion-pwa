@@ -15,7 +15,7 @@
           <button
             type="button"
             class="text-sm leading-[130%] tracking-ui text-ink underline underline-offset-4"
-            @click="resetDraft"
+            @click="resetFilters"
           >
             Сбросить все
           </button>
@@ -123,7 +123,7 @@ const {
   categoryOptions,
   closeFilters,
   applyFilters,
-  resetDraft,
+  resetFilters,
   toggleDraftList,
 } = useCatalogControls()
 </script>

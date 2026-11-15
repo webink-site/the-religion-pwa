@@ -66,14 +66,14 @@ export function catalogCardChips(product: CatalogProduct): CatalogCardChip[] {
   if (saleStart)
     chips.push({ id: 'sale-start', title: saleStart, dark: true })
 
-  const earn = catalogEarnPoints(product)
-  if (earn > 0) {
-    chips.push({
-      id: 'earn',
-      title: `+${earn.toLocaleString('ru-RU')} баллов`,
-      dark: true,
-    })
-  }
+  // const earn = catalogEarnPoints(product)
+  // if (earn > 0) {
+  //   chips.push({
+  //     id: 'earn',
+  //     title: `+${earn.toLocaleString('ru-RU')} баллов`,
+  //     dark: true,
+  //   })
+  // }
 
   if (product.flags?.is_limited)
     chips.push({ id: 'limited', title: 'Individual', dark: true })
@@ -116,12 +116,12 @@ export function catalogCardColors(product: CatalogProduct): CatalogCardColor[] {
   return items.sort((a, b) => a.label.localeCompare(b.label, 'ru', { sensitivity: 'base' }))
 }
 
-function catalogEarnPoints(product: CatalogProduct) {
-  if (product.loyalty?.excluded)
-    return 0
-  const value = product.loyalty?.earn_preview ?? product.loyalty_points_earn_preview ?? 0
-  return Number(value) || 0
-}
+// function catalogEarnPoints(product: CatalogProduct) {
+//   if (product.loyalty?.excluded)
+//     return 0
+//   const value = product.loyalty?.earn_preview ?? product.loyalty_points_earn_preview ?? 0
+//   return Number(value) || 0
+// }
 
 function catalogSaleStartLabel(product: CatalogProduct) {
   if (!saleNotStarted(product))

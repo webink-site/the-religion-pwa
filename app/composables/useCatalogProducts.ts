@@ -41,7 +41,10 @@ export async function useCatalogProducts() {
   })
 
   const hadFeed = catalog.feedKey === filterKey.value
-  await catalog.ensure(currentQuery())
+  const result = catalog.ensure(currentQuery())
+
+  if (import.meta.server || hadFeed)
+    await result
 
   if (import.meta.client && hadFeed)
     await restoreScroll()
