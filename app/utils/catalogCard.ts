@@ -123,7 +123,7 @@ export function catalogCardColors(product: CatalogProduct): CatalogCardColor[] {
 //   return Number(value) || 0
 // }
 
-function catalogSaleStartLabel(product: CatalogProduct) {
+export function catalogSaleStartLabel(product: CatalogProduct) {
   if (!saleNotStarted(product))
     return ''
   const raw = product.arrival_date?.trim() || product.preorder_estimated_arrival_date?.trim()
@@ -136,7 +136,7 @@ function catalogSaleStartLabel(product: CatalogProduct) {
   return `Старт продаж ${label}`
 }
 
-function saleNotStarted(product: CatalogProduct) {
+export function saleNotStarted(product: CatalogProduct) {
   if (product.drop?.can_purchase === false)
     return true
   const raw = product.arrival_date?.trim() || product.preorder_estimated_arrival_date?.trim()

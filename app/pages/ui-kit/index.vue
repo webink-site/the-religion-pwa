@@ -166,6 +166,14 @@
         item-value="id"
         item-title="name"
       />
+      <UiDropdown
+        v-model="form.size"
+        placeholder="Размер"
+        :items="kitSizes"
+        item-value="id"
+        item-title="label"
+        item-disabled="disabled"
+      />
     </section>
 
     <section class="space-y-5 w-fit max-w-full">
@@ -272,7 +280,16 @@ const form = reactive({
   smsNotify: true,
   sort: 'new',
   sizeFilter: 'm' as string | number | null,
+  size: null as string | null,
 })
+
+const kitSizes = [
+  { id: 's', label: 'S' },
+  { id: 'm', label: 'M' },
+  { id: 'l', label: 'L' },
+  { id: 'xl', label: 'XL', disabled: true },
+  { id: 'xxl', label: 'XXL', disabled: true },
+]
 
 const cities = [
   { id: 1, name: 'Москва' },
@@ -329,6 +346,7 @@ function resetForm() {
     smsNotify: true,
     sort: 'new',
     sizeFilter: 'm',
+    size: null,
   })
 }
 

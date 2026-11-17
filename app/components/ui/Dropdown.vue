@@ -7,7 +7,7 @@
       error ? 'ring-2 ring-danger/30' : 'shadow-inset-line',
       disabled ? 'opacity-60 pointer-events-none' : '',
     ]"
-    @click="!disabled && (open = !open)"
+    @click="toggle"
   >
     <span
       class="truncate pr-10"
@@ -22,34 +22,45 @@
       />
     </div>
 
-    <div
-      v-if="open"
-      class="absolute left-0 right-0 z-30 overflow-auto max-h-64 bg-white rounded-ui divide-y divide-line shadow-float"
-      :class="dropTop ? 'bottom-full mb-1' : 'top-full mt-1'"
-    >
-      <button
-        v-for="(item, i) in items"
-        :key="i"
-        type="button"
-        class="flex items-center w-full min-h-[44px] px-4 text-left body-txt hover:bg-surface disabled:text-secondary"
-        :class="{ 'bg-surface font-medium': isSelected(item) }"
-        :disabled="isItemDisabled(item)"
-        @click.stop="selectItem(item)"
+    <Teleport to="body">
+      <div
+        v-if="open"
+        ref="menuRef"
+        class="fixed z-[90] overflow-auto bg-white rounded-ui divide-y divide-line shadow-float"
+        :style="menuStyle"
+        @click.stop
       >
-        {{ getItemLabel(item) }}
-      </button>
-    </div>
+        <button
+          v-for="(item, i) in items"
+          :key="i"
+          type="button"
+          class="flex items-center w-full min-h-[44px] px-4 text-left body-txt enabled:hover:bg-surface disabled:opacity-40"
+          :class="{ 'bg-surface font-medium': isSelected(item) }"
+          :disabled="isItemDisabled(item)"
+          @click.stop="selectItem(item)"
+        >
+          {{ getItemLabel(item) }}
+        </button>
+      </div>
+    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ChevronDown } from '@lucide/vue'
+import { onFloatingDismiss } from '~/utils/floating'
+
+const MENU_MAX = 256
+const GAP = 4
+const ROW = 44
 
 const emit = defineEmits<{ change: [] }>()
 
 const modelValue = defineModel<string | number | null>('modelValue', { default: null })
 const dropdownRef = ref<HTMLElement | null>(null)
+const menuRef = ref<HTMLElement | null>(null)
 const open = ref(false)
+const menuStyle = ref<Record<string, string>>({})
 
 const props = withDefaults(
   defineProps<{
@@ -100,14 +111,67 @@ function close() {
   open.value = false
 }
 
-const dropTop = computed(() => {
+onFloatingDismiss(close)
+
+function toggle() {
+  if (props.disabled)
+    return
+  open.value = !open.value
+}
+
+function contentHeight() {
+  const menu = menuRef.value
+  if (menu)
+    return Math.min(menu.scrollHeight, MENU_MAX)
+  return Math.min(props.items.length * ROW, MENU_MAX)
+}
+
+function updatePlacement() {
+  const trigger = dropdownRef.value
+  if (!trigger)
+    return
+
+  const rect = trigger.getBoundingClientRect()
+  const height = contentHeight()
+  const spaceBelow = window.innerHeight - rect.bottom - GAP
+  const spaceAbove = rect.top - GAP
+
+  let above = false
   if (props.upOnly)
-    return true
-  if (props.downOnly)
-    return false
-  if (!dropdownRef.value)
-    return false
-  const rect = dropdownRef.value.getBoundingClientRect()
-  return rect.top > window.innerHeight / 2
+    above = true
+  else if (!props.downOnly)
+    above = spaceBelow < height && spaceAbove > spaceBelow
+
+  const maxHeight = Math.min(MENU_MAX, Math.max(ROW, above ? spaceAbove : spaceBelow))
+
+  menuStyle.value = {
+    left: `${rect.left}px`,
+    width: `${rect.width}px`,
+    maxHeight: `${maxHeight}px`,
+    top: above ? 'auto' : `${rect.bottom + GAP}px`,
+    bottom: above ? `${window.innerHeight - rect.top + GAP}px` : 'auto',
+  }
+}
+
+function onScrollOrResize() {
+  updatePlacement()
+}
+
+watch(open, async (value) => {
+  if (!value) {
+    window.removeEventListener('scroll', onScrollOrResize, true)
+    window.removeEventListener('resize', onScrollOrResize)
+    return
+  }
+  updatePlacement()
+  window.addEventListener('scroll', onScrollOrResize, true)
+  window.addEventListener('resize', onScrollOrResize)
+  await nextTick()
+  updatePlacement()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScrollOrResize, true)
+  window.removeEventListener('resize', onScrollOrResize)
 })
 </script>

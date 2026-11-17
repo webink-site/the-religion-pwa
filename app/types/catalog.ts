@@ -31,6 +31,7 @@ export interface CatalogImageSize {
 export interface CatalogImageVariant {
   original?: string | null
   urls?: Partial<Record<'thumb' | 'card' | 'sm' | 'md' | 'pdp' | 'lg' | 'xl' | 'xxl' | 'full', CatalogImageSize | string>>
+  srcset?: { webp?: string | null } | null
 }
 
 export interface CatalogImages {
