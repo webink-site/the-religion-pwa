@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed bottom-0 left-0 z-40 w-full transition-all duration-500"
+    class="fixed bottom-0 left-0 z-40 w-full transition-all duration-500 lg:hidden"
     :class="isScrolled || isMenuOpen ? 'bg-white' : ''"
   >
     <div

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="pb-28"
-    :class="isNativeApp ? 'pt-24' : 'pt-16'"
-  >
+  <div :class="isNativeApp ? 'pt-24' : 'pt-16'">
     <CatalogToolbar />
     <CatalogFilterSheet />
     <CatalogProductGrid

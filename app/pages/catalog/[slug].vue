@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-4 pb-28"
+    class="px-4"
     :class="isNativeApp ? 'pt-28' : 'pt-20'"
   >
     <p class="body-txt text-ink">

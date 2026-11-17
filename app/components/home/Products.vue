@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-20 pt-4 grid grid-cols-2">
+  <div class="pt-4 grid grid-cols-2">
     <!-- <pre>{{ data?.data }}</pre> -->
     <ShopProductCard
       v-for="(item, index) in data?.data"

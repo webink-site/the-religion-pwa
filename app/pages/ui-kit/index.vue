@@ -46,6 +46,29 @@
 
     <section class="space-y-4">
       <h2 class="ui-section-title">
+        Ссылки
+      </h2>
+      <div class="flex flex-col items-start gap-3">
+        <a
+          href="#"
+          class="basic-link body-txt"
+          @click.prevent
+        >Каталог</a>
+        <a
+          href="#"
+          class="basic-link body-txt"
+          @click.prevent
+        >Доставка</a>
+        <a
+          href="#"
+          class="basic-link body-txt"
+          @click.prevent
+        >О нас</a>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="ui-section-title">
         Float-меню
       </h2>
       <div class="flex flex-wrap gap-4">
